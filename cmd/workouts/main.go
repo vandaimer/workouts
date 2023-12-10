@@ -27,8 +27,6 @@ func main() {
 
 	workoutRepository := postgres.NewWorkoutRepository(dbClient)
 
-	log.Info().Msg("Migrations run.")
-
 	router := gin.New()
 	router.Use(gin.Recovery())
 
@@ -49,6 +47,5 @@ func main() {
 
 	<-stop
 	cancel()
-	// appStateManager.AttemptGracefulShutdown(ctx)
 	os.Exit(0)
 }

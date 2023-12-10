@@ -18,7 +18,7 @@ func NewWorkoutService(repository spiports.WorkoutRepository) *WorkoutService {
 	}
 }
 
-func (service *WorkoutService) Create(ctx context.Context, nweek uint, request apiports.CreateWorkoutRequest) (*model.Workout, error) {
+func (service *WorkoutService) Create(ctx context.Context, nweek uint, request apiports.CreateWorkoutRequest) ([]model.Workout, error) {
 	spiWorkouts := make([]spiports.CreateWorkoutRequest, 0)
 
 	for _, v := range request {
@@ -30,10 +30,10 @@ func (service *WorkoutService) Create(ctx context.Context, nweek uint, request a
 		})
 	}
 
-	created, err := service.repository.Create(ctx, spiWorkouts)
+	workoutsCreated, err := service.repository.Create(ctx, spiWorkouts)
 	if err != nil {
 		return nil, err
 	}
 
-	return created, nil
+	return workoutsCreated, nil
 }

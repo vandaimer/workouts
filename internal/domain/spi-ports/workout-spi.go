@@ -15,5 +15,5 @@ type CreateWorkoutRequest struct {
 }
 
 type WorkoutRepository interface {
-	Create(ctx context.Context, request []CreateWorkoutRequest) (*model.Workout, error)
+	Create(ctx context.Context, request []CreateWorkoutRequest) ([]model.Workout, error)
 }

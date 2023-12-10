@@ -24,16 +24,16 @@ func NewWorkoutRepository(dbClient *BunPostgresDatabaseClient) *PostgresWorkoutR
 	}
 }
 
-func (repo *PostgresWorkoutRepository) Create(ctx context.Context, createWorkoutRequest []spiports.CreateWorkoutRequest) (*model.Workout, error) {
+func (repo *PostgresWorkoutRepository) Create(ctx context.Context, createWorkoutRequest []spiports.CreateWorkoutRequest) ([]model.Workout, error) {
 	log.Info().Msg("Workout Repository Creating...")
-	workout := &model.Workout{}
+	workouts := make([]model.Workout, 0)
 
-	_, err := repo.client.DB.NewInsert().Model(&createWorkoutRequest).ModelTableExpr(tableName).Returning("*").Exec(ctx, workout)
+	_, err := repo.client.DB.NewInsert().Model(&createWorkoutRequest).ModelTableExpr(tableName).Returning("*").Exec(ctx, &workouts)
 	if err != nil {
 		return nil, err
 	}
 
-	log.Info().Msg(fmt.Sprintf("Workout Repository Created '%s'", workout.Id))
+	log.Info().Msg(fmt.Sprintf("Workouts Repository Created"))
 
-	return workout, nil
+	return workouts, nil
 }

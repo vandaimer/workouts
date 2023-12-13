@@ -8,10 +8,10 @@ import (
 )
 
 type CreateWorkoutRequest struct {
-	WeekNumber uint      `json:"week_name"`
-	Distance   int       `json:"distance"`
-	Time       int       `json:"time"`
-	Timestamp  time.Time `json:"timestamp"`
+	WeekNumber uint
+	Distance   int
+	Time       int
+	Timestamp  time.Time
 }
 
 type WorkoutRepository interface {

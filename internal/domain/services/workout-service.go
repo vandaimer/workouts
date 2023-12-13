@@ -30,10 +30,21 @@ func (service *WorkoutService) Create(ctx context.Context, nweek uint, request a
 		})
 	}
 
-	workoutsCreated, err := service.repository.Create(ctx, spiWorkouts)
+	_, err := service.repository.Create(ctx, spiWorkouts)
 	if err != nil {
 		return nil, err
 	}
 
-	return workoutsCreated, nil
+	response := model.WorkoutResponse{
+		MediumDistance:       8000,
+		MediumTime:           3000,
+		MaxDistance:          22000,
+		MaxTime:              7000,
+		MediumWeeklyDistance: 30000,
+		MediumWeeklyTime:     9000,
+		MaxWeeklyDistance:    30000,
+		MaxWeeklyTime:        9000,
+	}
+
+	return &response, nil
 }

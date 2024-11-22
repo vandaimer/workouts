@@ -22,8 +22,10 @@ func NewWorkoutHandler(workoutService *services.WorkoutService) *WorkoutHandler 
 func (handler *WorkoutHandler) Create(ctx *gin.Context) {
 	nweeksString, ok := ctx.GetQuery("nweeks")
 
+	errorMessage := "Query parameter 'nweeks' is required"
+
 	if !ok {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Query param 'nweeks' is required."})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": errorMessage})
 		return
 	}
 

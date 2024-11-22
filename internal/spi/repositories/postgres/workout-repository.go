@@ -2,7 +2,6 @@ package postgres
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/rs/zerolog/log"
 	"github.com/vandaimer/workouts/internal/domain/model"
@@ -33,7 +32,7 @@ func (repo *PostgresWorkoutRepository) Create(ctx context.Context, createWorkout
 		return nil, err
 	}
 
-	log.Info().Msg(fmt.Sprintf("Workouts Repository Created"))
+	log.Info().Msg("Workouts Repository Created")
 
 	return workouts, nil
 }

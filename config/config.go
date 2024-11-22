@@ -33,7 +33,7 @@ func MustLoad(filenames ...string) *Config {
 	viperConfig.SetConfigFile(".env")
 	err := viperConfig.ReadInConfig()
 	if err != nil {
-		fmt.Printf("fatal error config file: %w\n", err)
+		_ = fmt.Errorf("fatal error config file: %w", err)
 	}
 
 	var config Config
